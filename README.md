@@ -1,4 +1,4 @@
 CTF
 ===
 
-My solved CTF exploits
+Some of my solved exploits during CTFs.
