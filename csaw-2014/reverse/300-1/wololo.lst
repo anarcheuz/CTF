@@ -1,0 +1,760 @@
+__text:00000A80	; ===========================================================================
+__text:00000A80
+__text:00000A80	; Segment type:	Pure code
+__text:00000A80			AREA __text, CODE, READWRITE
+__text:00000A80			; ORG 0xA80
+__text:00000A80			CODE16
+__text:00000A80
+__text:00000A80	; =============== S U B	R O U T	I N E =======================================
+__text:00000A80
+__text:00000A80
+__text:00000A80			EXPORT _col_size
+__text:00000A80	_col_size				; CODE XREF: _validate_database+DEp
+__text:00000A80						; _check_login+48p ...
+__text:00000A80
+__text:00000A80	var_C		= -0xC
+__text:00000A80	var_8		= -8
+__text:00000A80	var_4		= -4
+__text:00000A80
+__text:00000A80			SUB		SP, SP,	#0xC
+__text:00000A82			STR		R0, [SP,#0xC+var_8]
+__text:00000A84			LDRB		R0, [R0]
+__text:00000A86			CMP		R0, #7
+__text:00000A88			STR		R0, [SP,#0xC+var_C]
+__text:00000A8A			BHI		loc_AEA
+__text:00000A8C			LDR		R1, [SP,#0xC+var_C]
+__text:00000A8E			TBB.W		[PC,R1]	; switch 8 cases
+__text:00000A8E	; ---------------------------------------------------------------------------
+__text:00000A92	jpt_A8E		DCB 4			; jump table for switch	statement
+__text:00000A93			DCB 9
+__text:00000A94			DCB 0xE
+__text:00000A95			DCB 0x13
+__text:00000A96			DCB 0x18
+__text:00000A97			DCB 0x1D
+__text:00000A98			DCB 0x22
+__text:00000A99			DCB 0x27
+__text:00000A9A	; ---------------------------------------------------------------------------
+__text:00000A9A
+__text:00000A9A	loc_A9A					; CODE XREF: _col_size+Ej
+__text:00000A9A			MOVS		R0, #1	; jumptable 00000A8E case 0
+__text:00000AA0			STR		R0, [SP,#0xC+var_4]
+__text:00000AA2			B		loc_AF2
+__text:00000AA4	; ---------------------------------------------------------------------------
+__text:00000AA4
+__text:00000AA4	loc_AA4					; CODE XREF: _col_size+Ej
+__text:00000AA4			MOVS		R0, #2	; jumptable 00000A8E case 1
+__text:00000AAA			STR		R0, [SP,#0xC+var_4]
+__text:00000AAC			B		loc_AF2
+__text:00000AAE	; ---------------------------------------------------------------------------
+__text:00000AAE
+__text:00000AAE	loc_AAE					; CODE XREF: _col_size+Ej
+__text:00000AAE			MOVS		R0, #4	; jumptable 00000A8E case 2
+__text:00000AB4			STR		R0, [SP,#0xC+var_4]
+__text:00000AB6			B		loc_AF2
+__text:00000AB8	; ---------------------------------------------------------------------------
+__text:00000AB8
+__text:00000AB8	loc_AB8					; CODE XREF: _col_size+Ej
+__text:00000AB8			MOVS		R0, #8	; jumptable 00000A8E case 3
+__text:00000ABE			STR		R0, [SP,#0xC+var_4]
+__text:00000AC0			B		loc_AF2
+__text:00000AC2	; ---------------------------------------------------------------------------
+__text:00000AC2
+__text:00000AC2	loc_AC2					; CODE XREF: _col_size+Ej
+__text:00000AC2			MOVS		R0, #8	; jumptable 00000A8E case 4
+__text:00000AC8			STR		R0, [SP,#0xC+var_4]
+__text:00000ACA			B		loc_AF2
+__text:00000ACC	; ---------------------------------------------------------------------------
+__text:00000ACC
+__text:00000ACC	loc_ACC					; CODE XREF: _col_size+Ej
+__text:00000ACC			MOVS		R0, #0x10 ; jumptable 00000A8E case 5
+__text:00000AD2			STR		R0, [SP,#0xC+var_4]
+__text:00000AD4			B		loc_AF2
+__text:00000AD6	; ---------------------------------------------------------------------------
+__text:00000AD6
+__text:00000AD6	loc_AD6					; CODE XREF: _col_size+Ej
+__text:00000AD6			MOVS		R0, #0x20 ; ' '	; jumptable 00000A8E case 6
+__text:00000ADC			STR		R0, [SP,#0xC+var_4]
+__text:00000ADE			B		loc_AF2
+__text:00000AE0	; ---------------------------------------------------------------------------
+__text:00000AE0
+__text:00000AE0	loc_AE0					; CODE XREF: _col_size+Ej
+__text:00000AE0			MOVS		R0, #4	; jumptable 00000A8E case 7
+__text:00000AE6			STR		R0, [SP,#0xC+var_4]
+__text:00000AE8			B		loc_AF2
+__text:00000AEA	; ---------------------------------------------------------------------------
+__text:00000AEA
+__text:00000AEA	loc_AEA					; CODE XREF: _col_size+Aj
+__text:00000AEA			MOVS		R0, #0
+__text:00000AF0			STR		R0, [SP,#0xC+var_4]
+__text:00000AF2
+__text:00000AF2	loc_AF2					; CODE XREF: _col_size+22j
+__text:00000AF2						; _col_size+2Cj ...
+__text:00000AF2			LDR		R0, [SP,#0xC+var_4]
+__text:00000AF4			ADD		SP, SP,	#0xC
+__text:00000AF6			BX		LR
+__text:00000AF6	; End of function _col_size
+__text:00000AF6
+__text:00000AF8
+__text:00000AF8	; =============== S U B	R O U T	I N E =======================================
+__text:00000AF8
+__text:00000AF8
+__text:00000AF8			EXPORT _validate_database
+__text:00000AF8	_validate_database
+__text:00000AF8
+__text:00000AF8	var_2C		= -0x2C
+__text:00000AF8	var_28		= -0x28
+__text:00000AF8	var_24		= -0x24
+__text:00000AF8	var_20		= -0x20
+__text:00000AF8	var_1C		= -0x1C
+__text:00000AF8	var_18		= -0x18
+__text:00000AF8	var_14		= -0x14
+__text:00000AF8	var_10		= -0x10
+__text:00000AF8	var_C		= -0xC
+__text:00000AF8
+__text:00000AF8			PUSH		{R7,LR}
+__text:00000AFA			MOV		R7, SP
+__text:00000AFC			SUB		SP, SP,	#0x24
+__text:00000AFE			MOVS		R2, #0xC
+__text:00000B04			STR		R0, [SP,#0x2C+var_10]
+__text:00000B06			STR		R1, [SP,#0x2C+var_14]
+__text:00000B08			LDR		R0, [SP,#0x2C+var_10]
+__text:00000B0A			STR		R0, [SP,#0x2C+var_18]
+__text:00000B0C			STR		R2, [SP,#0x2C+var_1C]
+__text:00000B0E			LDR		R0, [SP,#0x2C+var_14]
+__text:00000B10			LDR		R1, [SP,#0x2C+var_1C]
+__text:00000B12			CMP		R0, R1
+__text:00000B14			BCS		loc_B20
+__text:00000B16			MOVS		R0, #0
+__text:00000B1C			STR		R0, [SP,#0x2C+var_C]
+__text:00000B1E			B		loc_C2A
+__text:00000B20	; ---------------------------------------------------------------------------
+__text:00000B20
+__text:00000B20	loc_B20					; CODE XREF: _validate_database+1Cj
+__text:00000B20			MOV		R0, #0x4F4C4F57
+__text:00000B28			LDR		R1, [SP,#0x2C+var_18]
+__text:00000B2A			LDR		R1, [R1]
+__text:00000B2C			CMP		R1, R0
+__text:00000B2E			BEQ		loc_B3A
+__text:00000B30			MOVS		R0, #0
+__text:00000B36			STR		R0, [SP,#0x2C+var_C]
+__text:00000B38			B		loc_C2A
+__text:00000B3A	; ---------------------------------------------------------------------------
+__text:00000B3A
+__text:00000B3A	loc_B3A					; CODE XREF: _validate_database+36j
+__text:00000B3A			LDR		R0, [SP,#0x2C+var_18]
+__text:00000B3C			LDR		R0, [R0,#4]
+__text:00000B3E			CMP		R0, #1
+__text:00000B40			BEQ		loc_B4C
+__text:00000B42			MOVS		R0, #0
+__text:00000B48			STR		R0, [SP,#0x2C+var_C]
+__text:00000B4A			B		loc_C2A
+__text:00000B4C	; ---------------------------------------------------------------------------
+__text:00000B4C
+__text:00000B4C	loc_B4C					; CODE XREF: _validate_database+48j
+__text:00000B4C			LDR		R0, [SP,#0x2C+var_18]
+__text:00000B4E			LDRH		R0, [R0,#0xA]
+__text:00000B50			CMP		R0, #4
+__text:00000B52			BGE		loc_B5E
+__text:00000B54			MOVS		R0, #0
+__text:00000B5A			STR		R0, [SP,#0x2C+var_C]
+__text:00000B5C			B		loc_C2A
+__text:00000B5E	; ---------------------------------------------------------------------------
+__text:00000B5E
+__text:00000B5E	loc_B5E					; CODE XREF: _validate_database+5Aj
+__text:00000B5E			LDR		R0, [SP,#0x2C+var_18]
+__text:00000B60			LDRH		R0, [R0,#0xA]
+__text:00000B62			CMP.W		R0, #0x1000
+__text:00000B66			BLE		loc_B72
+__text:00000B68			MOVS		R0, #0
+__text:00000B6E			STR		R0, [SP,#0x2C+var_C]
+__text:00000B70			B		loc_C2A
+__text:00000B72	; ---------------------------------------------------------------------------
+__text:00000B72
+__text:00000B72	loc_B72					; CODE XREF: _validate_database+6Ej
+__text:00000B72			LDR		R0, [SP,#0x2C+var_18]
+__text:00000B74			LDRH		R0, [R0,#8]
+__text:00000B76			CMP		R0, #4
+__text:00000B78			BGE		loc_B84
+__text:00000B7A			MOVS		R0, #0
+__text:00000B80			STR		R0, [SP,#0x2C+var_C]
+__text:00000B82			B		loc_C2A
+__text:00000B84	; ---------------------------------------------------------------------------
+__text:00000B84
+__text:00000B84	loc_B84					; CODE XREF: _validate_database+80j
+__text:00000B84			LDR		R0, [SP,#0x2C+var_18]
+__text:00000B86			LDRH		R0, [R0,#8]
+__text:00000B88			CMP		R0, #0x10
+__text:00000B8A			BLE		loc_B96
+__text:00000B8C			MOVS		R0, #0
+__text:00000B92			STR		R0, [SP,#0x2C+var_C]
+__text:00000B94			B		loc_C2A
+__text:00000B96	; ---------------------------------------------------------------------------
+__text:00000B96
+__text:00000B96	loc_B96					; CODE XREF: _validate_database+92j
+__text:00000B96			LDR		R0, [SP,#0x2C+var_18]
+__text:00000B98			LDRH		R0, [R0,#8]
+__text:00000B9A			MOVS		R1, #0x11
+__text:00000BA0			MULS		R0, R1
+__text:00000BA2			LDR		R1, [SP,#0x2C+var_1C]
+__text:00000BA4			ADD		R0, R1
+__text:00000BA6			STR		R0, [SP,#0x2C+var_1C]
+__text:00000BA8			LDR		R0, [SP,#0x2C+var_14]
+__text:00000BAA			LDR		R1, [SP,#0x2C+var_1C]
+__text:00000BAC			CMP		R0, R1
+__text:00000BAE			BCS		loc_BBA
+__text:00000BB0			MOVS		R0, #0
+__text:00000BB6			STR		R0, [SP,#0x2C+var_C]
+__text:00000BB8			B		loc_C2A
+__text:00000BBA	; ---------------------------------------------------------------------------
+__text:00000BBA
+__text:00000BBA	loc_BBA					; CODE XREF: _validate_database+B6j
+__text:00000BBA			MOVS		R0, #0
+__text:00000BC0			STR		R0, [SP,#0x2C+var_20]
+__text:00000BC2			LDR		R1, [SP,#0x2C+var_10]
+__text:00000BC4			ADDS		R1, #0xC
+__text:00000BC6			STR		R1, [SP,#0x2C+var_24]
+__text:00000BC8			STR		R0, [SP,#0x2C+var_28]
+__text:00000BCA
+__text:00000BCA	loc_BCA					; CODE XREF: _validate_database+108j
+__text:00000BCA			LDR		R0, [SP,#0x2C+var_28]
+__text:00000BCC			LDR		R1, [SP,#0x2C+var_18]
+__text:00000BCE			LDRH		R1, [R1,#8]
+__text:00000BD0			CMP		R0, R1
+__text:00000BD2			BCS		loc_C02
+__text:00000BD4			LDR		R0, [SP,#0x2C+var_24]
+__text:00000BD6			BL		_col_size
+__text:00000BDA			STR		R0, [SP,#0x2C+var_2C]
+__text:00000BDC			LDR		R0, [SP,#0x2C+var_2C]
+__text:00000BDE			CMP		R0, #0
+__text:00000BE0			BNE		loc_BEC
+__text:00000BE2			MOVS		R0, #0
+__text:00000BE8			STR		R0, [SP,#0x2C+var_C]
+__text:00000BEA			B		loc_C2A
+__text:00000BEC	; ---------------------------------------------------------------------------
+__text:00000BEC
+__text:00000BEC	loc_BEC					; CODE XREF: _validate_database+E8j
+__text:00000BEC			LDR		R0, [SP,#0x2C+var_2C]
+__text:00000BEE			LDR		R1, [SP,#0x2C+var_20]
+__text:00000BF0			ADD		R0, R1
+__text:00000BF2			STR		R0, [SP,#0x2C+var_20]
+__text:00000BF4			LDR		R0, [SP,#0x2C+var_24]
+__text:00000BF6			ADDS		R0, #0x11
+__text:00000BF8			STR		R0, [SP,#0x2C+var_24]
+__text:00000BFA			LDR		R0, [SP,#0x2C+var_28]
+__text:00000BFC			ADDS		R0, #1
+__text:00000BFE			STR		R0, [SP,#0x2C+var_28]
+__text:00000C00			B		loc_BCA
+__text:00000C02	; ---------------------------------------------------------------------------
+__text:00000C02
+__text:00000C02	loc_C02					; CODE XREF: _validate_database+DAj
+__text:00000C02			LDR		R0, [SP,#0x2C+var_20]
+__text:00000C04			LDR		R1, [SP,#0x2C+var_18]
+__text:00000C06			LDRH		R1, [R1,#0xA]
+__text:00000C08			MULS		R0, R1
+__text:00000C0A			LDR		R1, [SP,#0x2C+var_1C]
+__text:00000C0C			ADD		R0, R1
+__text:00000C0E			STR		R0, [SP,#0x2C+var_1C]
+__text:00000C10			LDR		R0, [SP,#0x2C+var_14]
+__text:00000C12			LDR		R1, [SP,#0x2C+var_1C]
+__text:00000C14			CMP		R0, R1
+__text:00000C16			BCS		loc_C22
+__text:00000C18			MOVS		R0, #0
+__text:00000C1E			STR		R0, [SP,#0x2C+var_C]
+__text:00000C20			B		loc_C2A
+__text:00000C22	; ---------------------------------------------------------------------------
+__text:00000C22
+__text:00000C22	loc_C22					; CODE XREF: _validate_database+11Ej
+__text:00000C22			MOVS		R0, #1
+__text:00000C28			STR		R0, [SP,#0x2C+var_C]
+__text:00000C2A
+__text:00000C2A	loc_C2A					; CODE XREF: _validate_database+26j
+__text:00000C2A						; _validate_database+40j ...
+__text:00000C2A			LDR		R0, [SP,#0x2C+var_C]
+__text:00000C2C			ADD		SP, SP,	#0x24
+__text:00000C2E			POP		{R7,PC}
+__text:00000C2E	; End of function _validate_database
+__text:00000C2E
+__text:00000C30
+__text:00000C30	; =============== S U B	R O U T	I N E =======================================
+__text:00000C30
+__text:00000C30
+__text:00000C30			EXPORT _check_login
+__text:00000C30	_check_login
+__text:00000C30
+__text:00000C30	var_6C		= -0x6C
+__text:00000C30	var_68		= -0x68
+__text:00000C30	var_64		= -0x64
+__text:00000C30	var_60		= -0x60
+__text:00000C30	var_5C		= -0x5C
+__text:00000C30	var_58		= -0x58
+__text:00000C30	var_54		= -0x54
+__text:00000C30	var_50		= -0x50
+__text:00000C30	var_4C		= -0x4C
+__text:00000C30	var_48		= -0x48
+__text:00000C30	var_44		= -0x44
+__text:00000C30	var_40		= -0x40
+__text:00000C30	var_3C		= -0x3C
+__text:00000C30	var_38		= -0x38
+__text:00000C30	var_34		= -0x34
+__text:00000C30	var_30		= -0x30
+__text:00000C30	var_2C		= -0x2C
+__text:00000C30	var_28		= -0x28
+__text:00000C30	var_24		= -0x24
+__text:00000C30	var_20		= -0x20
+__text:00000C30	var_1C		= -0x1C
+__text:00000C30	var_18		= -0x18
+__text:00000C30	var_14		= -0x14
+__text:00000C30	var_10		= -0x10
+__text:00000C30	var_C		= -0xC
+__text:00000C30
+__text:00000C30			PUSH		{R7,LR}
+__text:00000C32			MOV		R7, SP
+__text:00000C34			SUB		SP, SP,	#0x64
+__text:00000C36			MOVS		R2, #0
+__text:00000C3C			STR		R0, [SP,#0x6C+var_10]
+__text:00000C3E			STR		R1, [SP,#0x6C+var_14]
+__text:00000C40			LDR		R0, [SP,#0x6C+var_10]
+__text:00000C42			STR		R0, [SP,#0x6C+var_18]
+__text:00000C44			LDR		R0, [SP,#0x6C+var_10]
+__text:00000C46			ADDS		R0, #0xC
+__text:00000C48			STR		R0, [SP,#0x6C+var_1C]
+__text:00000C4A			LDR		R0, [SP,#0x6C+var_10]
+__text:00000C4C			ADDS		R0, #0xC
+__text:00000C4E			STR		R0, [SP,#0x6C+var_20]
+__text:00000C50			LDR		R0, [SP,#0x6C+var_18]
+__text:00000C52			LDRH		R0, [R0,#8]
+__text:00000C54			MOVS		R1, #0x11
+__text:00000C5A			MULS		R0, R1
+__text:00000C5C			LDR		R1, [SP,#0x6C+var_20]
+__text:00000C5E			ADD		R0, R1
+__text:00000C60			STR		R0, [SP,#0x6C+var_20]
+__text:00000C62			STR		R2, [SP,#0x6C+var_24]
+__text:00000C64			LDR		R0, [SP,#0x6C+var_10]
+__text:00000C66			ADDS		R0, #0xC
+__text:00000C68			STR		R0, [SP,#0x6C+var_28]
+__text:00000C6A			STR		R2, [SP,#0x6C+var_2C]
+__text:00000C6C
+__text:00000C6C	loc_C6C					; CODE XREF: _check_login+72j
+__text:00000C6C			LDR		R0, [SP,#0x6C+var_2C]
+__text:00000C6E			LDR		R1, [SP,#0x6C+var_18]
+__text:00000C70			LDRH		R1, [R1,#8]
+__text:00000C72			CMP		R0, R1
+__text:00000C74			BCS		loc_CA4
+__text:00000C76			LDR		R0, [SP,#0x6C+var_28]
+__text:00000C78			BL		_col_size
+__text:00000C7C			STR		R0, [SP,#0x6C+var_30]
+__text:00000C7E			LDR		R0, [SP,#0x6C+var_30]
+__text:00000C80			CMP		R0, #0
+__text:00000C82			BNE		loc_C8E
+__text:00000C84			MOVS		R0, #0
+__text:00000C8A			STR		R0, [SP,#0x6C+var_C]
+__text:00000C8C			B		loc_F1C
+__text:00000C8E	; ---------------------------------------------------------------------------
+__text:00000C8E
+__text:00000C8E	loc_C8E					; CODE XREF: _check_login+52j
+__text:00000C8E			LDR		R0, [SP,#0x6C+var_30]
+__text:00000C90			LDR		R1, [SP,#0x6C+var_24]
+__text:00000C92			ADD		R0, R1
+__text:00000C94			STR		R0, [SP,#0x6C+var_24]
+__text:00000C96			LDR		R0, [SP,#0x6C+var_28]
+__text:00000C98			ADDS		R0, #0x11
+__text:00000C9A			STR		R0, [SP,#0x6C+var_28]
+__text:00000C9C			LDR		R0, [SP,#0x6C+var_2C]
+__text:00000C9E			ADDS		R0, #1
+__text:00000CA0			STR		R0, [SP,#0x6C+var_2C]
+__text:00000CA2			B		loc_C6C
+__text:00000CA4	; ---------------------------------------------------------------------------
+__text:00000CA4
+__text:00000CA4	loc_CA4					; CODE XREF: _check_login+44j
+__text:00000CA4			LDR		R0, [SP,#0x6C+var_20]
+__text:00000CA6			STR		R0, [SP,#0x6C+var_28]
+__text:00000CA8			LDR		R0, [SP,#0x6C+var_10]
+__text:00000CAA			LDR		R1, [SP,#0x6C+var_14]
+__text:00000CAC			ADD		R0, R1
+__text:00000CAE			STR		R0, [SP,#0x6C+var_34]
+__text:00000CB0
+__text:00000CB0	loc_CB0					; CODE XREF: _check_login+2E2j
+__text:00000CB0			LDR		R0, [SP,#0x6C+var_28]
+__text:00000CB2			LDR		R1, [SP,#0x6C+var_34]
+__text:00000CB4			CMP		R0, R1
+__text:00000CB6			BCS.W		loc_F14
+__text:00000CBA			MOVS		R0, #0
+__text:00000CC0			LDR		R1, [SP,#0x6C+var_28]
+__text:00000CC2			STR		R1, [SP,#0x6C+var_38]
+__text:00000CC4			STR		R0, [SP,#0x6C+var_3C]
+__text:00000CC6			STR		R0, [SP,#0x6C+var_40]
+__text:00000CC8			STR		R0, [SP,#0x6C+var_44]
+__text:00000CCA			STR		R0, [SP,#0x6C+var_48]
+__text:00000CCC			STR		R0, [SP,#0x6C+var_4C]
+__text:00000CCE
+__text:00000CCE	loc_CCE					; CODE XREF: _check_login+296j
+__text:00000CCE			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000CD0			LDR		R1, [SP,#0x6C+var_18]
+__text:00000CD2			LDRH		R1, [R1,#8]
+__text:00000CD4			CMP		R0, R1
+__text:00000CD6			BCS.W		loc_EC8
+__text:00000CDA			MOV		R1, #(aUsername	- 0xCE6) ; "USERNAME"
+__text:00000CE2			ADD		R1, PC	; "USERNAME"
+__text:00000CE4			MOVS		R2, #8	; size_t
+__text:00000CEA			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000CEC			LDR		R3, [SP,#0x6C+var_1C]
+__text:00000CEE			MOV		R9, #0x11
+__text:00000CF6			MUL.W		R0, R0,	R9
+__text:00000CFA			ADD		R0, R3
+__text:00000CFC			ADDS		R0, #1	; char *
+__text:00000CFE			BLX		_strncmp
+__text:00000D02			CMP		R0, #0
+__text:00000D04			BNE		loc_D3E
+__text:00000D06			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000D08			LDR		R1, [SP,#0x6C+var_1C]
+__text:00000D0A			MOVS		R2, #0x11
+__text:00000D10			MULS		R0, R2
+__text:00000D12			ADD		R0, R1
+__text:00000D14			LDRB		R0, [R0]
+__text:00000D16			CMP		R0, #5
+__text:00000D18			BNE		loc_D3E
+__text:00000D1A			MOV		R1, #(aCaptainfalcon - 0xD26) ;	"captainfalcon"
+__text:00000D22			ADD		R1, PC	; "captainfalcon"
+__text:00000D24			MOVS		R2, #0xE ; size_t
+__text:00000D2A			LDR		R0, [SP,#0x6C+var_38] ;	char *
+__text:00000D2C			BLX		_strncmp
+__text:00000D30			CMP		R0, #0
+__text:00000D32			BNE		loc_D3C
+__text:00000D34			MOVS		R0, #1
+__text:00000D3A			STR		R0, [SP,#0x6C+var_3C]
+__text:00000D3C
+__text:00000D3C	loc_D3C					; CODE XREF: _check_login+102j
+__text:00000D3C			B		loc_D3E
+__text:00000D3E	; ---------------------------------------------------------------------------
+__text:00000D3E
+__text:00000D3E	loc_D3E					; CODE XREF: _check_login+D4j
+__text:00000D3E						; _check_login+E8j ...
+__text:00000D3E			MOV		R1, #(aPassword	- 0xD4A) ; "PASSWORD"
+__text:00000D46			ADD		R1, PC	; "PASSWORD"
+__text:00000D48			MOVS		R2, #8	; size_t
+__text:00000D4E			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000D50			LDR		R3, [SP,#0x6C+var_1C]
+__text:00000D52			MOV		R9, #0x11
+__text:00000D5A			MUL.W		R0, R0,	R9
+__text:00000D5E			ADD		R0, R3
+__text:00000D60			ADDS		R0, #1	; char *
+__text:00000D62			BLX		_strncmp
+__text:00000D66			CMP		R0, #0
+__text:00000D68			BNE		loc_DA2
+__text:00000D6A			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000D6C			LDR		R1, [SP,#0x6C+var_1C]
+__text:00000D6E			MOVS		R2, #0x11
+__text:00000D74			MULS		R0, R2
+__text:00000D76			ADD		R0, R1
+__text:00000D78			LDRB		R0, [R0]
+__text:00000D7A			CMP		R0, #6
+__text:00000D7C			BNE		loc_DA2
+__text:00000D7E			MOV		R1, #(aFc03329505475d -	0xD8A) ; "fc03329505475dd4be51627cc7f0b1f1"
+__text:00000D86			ADD		R1, PC	; "fc03329505475dd4be51627cc7f0b1f1"
+__text:00000D88			MOVS		R2, #0x20 ; ' '	; size_t
+__text:00000D8E			LDR		R0, [SP,#0x6C+var_38] ;	char *
+__text:00000D90			BLX		_strncmp
+__text:00000D94			CMP		R0, #0
+__text:00000D96			BNE		loc_DA0
+__text:00000D98			MOVS		R0, #1
+__text:00000D9E			STR		R0, [SP,#0x6C+var_40]
+__text:00000DA0
+__text:00000DA0	loc_DA0					; CODE XREF: _check_login+166j
+__text:00000DA0			B		loc_DA2
+__text:00000DA2	; ---------------------------------------------------------------------------
+__text:00000DA2
+__text:00000DA2	loc_DA2					; CODE XREF: _check_login+138j
+__text:00000DA2						; _check_login+14Cj ...
+__text:00000DA2			MOV		R1, #(aAdmin - 0xDAE) ;	"ADMIN"
+__text:00000DAA			ADD		R1, PC	; "ADMIN"
+__text:00000DAC			MOVS		R2, #5	; size_t
+__text:00000DB2			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000DB4			LDR		R3, [SP,#0x6C+var_1C]
+__text:00000DB6			MOV		R9, #0x11
+__text:00000DBE			MUL.W		R0, R0,	R9
+__text:00000DC2			ADD		R0, R3
+__text:00000DC4			ADDS		R0, #1	; char *
+__text:00000DC6			BLX		_strncmp
+__text:00000DCA			CMP		R0, #0
+__text:00000DCC			BNE		loc_E0C
+__text:00000DCE			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000DD0			LDR		R1, [SP,#0x6C+var_1C]
+__text:00000DD2			MOVS		R2, #0x11
+__text:00000DD8			MULS		R0, R2
+__text:00000DDA			ADD		R0, R1
+__text:00000DDC			LDRB		R0, [R0]
+__text:00000DDE			CMP		R0, #0
+__text:00000DE0			BNE		loc_E0C
+__text:00000DE2			LDR		R0, [SP,#0x6C+var_38]
+__text:00000DE4			LDRB		R0, [R0]
+__text:00000DE6			STRB.W		R0, [SP,#0x6C+var_50]
+__text:00000DEA			LDRB.W		R0, [SP,#0x6C+var_50]
+__text:00000DEE			CMP		R0, #1
+__text:00000DF0			BNE		loc_DFA
+__text:00000DF2			MOVS		R0, #1
+__text:00000DF8			STR		R0, [SP,#0x6C+var_44]
+__text:00000DFA
+__text:00000DFA	loc_DFA					; CODE XREF: _check_login+1C0j
+__text:00000DFA			MOV		R0, #(aU - 0xE06) ; "%u\n"
+__text:00000E02			ADD		R0, PC	; "%u\n"
+__text:00000E04			LDR		R1, [SP,#0x6C+var_44]
+__text:00000E06			BLX		_printf
+__text:00000E0A			STR		R0, [SP,#0x6C+var_58]
+__text:00000E0C
+__text:00000E0C	loc_E0C					; CODE XREF: _check_login+19Cj
+__text:00000E0C						; _check_login+1B0j
+__text:00000E0C			MOV		R1, #(aIsawesome - 0xE18) ; "ISAWESOME"
+__text:00000E14			ADD		R1, PC	; "ISAWESOME"
+__text:00000E16			MOVS		R2, #9	; size_t
+__text:00000E1C			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000E1E			LDR		R3, [SP,#0x6C+var_1C]
+__text:00000E20			MOV		R9, #0x11
+__text:00000E28			MUL.W		R0, R0,	R9
+__text:00000E2C			ADD		R0, R3
+__text:00000E2E			ADDS		R0, #1	; char *
+__text:00000E30			BLX		_strncmp
+__text:00000E34			CMP		R0, #0
+__text:00000E36			BNE		loc_E68
+__text:00000E38			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000E3A			LDR		R1, [SP,#0x6C+var_1C]
+__text:00000E3C			MOVS		R2, #0x11
+__text:00000E42			MULS		R0, R2
+__text:00000E44			ADD		R0, R1
+__text:00000E46			LDRB		R0, [R0]
+__text:00000E48			CMP		R0, #0
+__text:00000E4A			BNE		loc_E68
+__text:00000E4C			LDR		R0, [SP,#0x6C+var_38]
+__text:00000E4E			LDRB		R0, [R0]
+__text:00000E50			STRB.W		R0, [SP,#0x6C+var_54]
+__text:00000E54			LDRB.W		R0, [SP,#0x6C+var_54]
+__text:00000E58			CMP		R0, #1
+__text:00000E5A			MOVW		R0, #0
+__text:00000E5E			IT EQ
+__text:00000E60			MOVEQ		R0, #1
+__text:00000E62			AND.W		R0, R0,	#1
+__text:00000E66			STR		R0, [SP,#0x6C+var_48]
+__text:00000E68
+__text:00000E68	loc_E68					; CODE XREF: _check_login+206j
+__text:00000E68						; _check_login+21Aj
+__text:00000E68			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000E6A			LDR		R1, [SP,#0x6C+var_1C]
+__text:00000E6C			MOVS		R2, #0x11
+__text:00000E72			MULS		R0, R2
+__text:00000E74			ADD		R0, R1
+__text:00000E76			ADDS		R1, R0,	#1
+__text:00000E78			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000E7A			LDR		R2, [SP,#0x6C+var_1C]
+__text:00000E7C			MOVS		R3, #0x11
+__text:00000E82			MULS		R0, R3
+__text:00000E84			ADD		R0, R2
+__text:00000E86			STR		R1, [SP,#0x6C+var_5C]
+__text:00000E88			BL		_col_size
+__text:00000E8C			MOV		R1, #(a_16sUP -	0xE98) ; "%.16s %u\t%p\n"
+__text:00000E94			ADD		R1, PC	; "%.16s %u\t%p\n"
+__text:00000E96			LDR		R3, [SP,#0x6C+var_38]
+__text:00000E98			STR		R0, [SP,#0x6C+var_60]
+__text:00000E9A			MOV		R0, R1	; char *
+__text:00000E9C			LDR		R1, [SP,#0x6C+var_5C]
+__text:00000E9E			LDR		R2, [SP,#0x6C+var_60]
+__text:00000EA0			BLX		_printf
+__text:00000EA4			LDR		R1, [SP,#0x6C+var_4C]
+__text:00000EA6			LDR		R2, [SP,#0x6C+var_1C]
+__text:00000EA8			MOVS		R3, #0x11
+__text:00000EAE			MULS		R1, R3
+__text:00000EB0			ADD		R1, R2
+__text:00000EB2			STR		R0, [SP,#0x6C+var_64]
+__text:00000EB4			MOV		R0, R1
+__text:00000EB6			BL		_col_size
+__text:00000EBA			LDR		R1, [SP,#0x6C+var_38]
+__text:00000EBC			ADD		R0, R1
+__text:00000EBE			STR		R0, [SP,#0x6C+var_38]
+__text:00000EC0			LDR		R0, [SP,#0x6C+var_4C]
+__text:00000EC2			ADDS		R0, #1
+__text:00000EC4			STR		R0, [SP,#0x6C+var_4C]
+__text:00000EC6			B		loc_CCE
+__text:00000EC8	; ---------------------------------------------------------------------------
+__text:00000EC8
+__text:00000EC8	loc_EC8					; CODE XREF: _check_login+A6j
+__text:00000EC8			MOV		R0, #(aUsernameUPassw -	0xED4) ; "username: %u\tpassword: %u\tadmin: %u\t"...
+__text:00000ED0			ADD		R0, PC	; "username: %u\tpassword: %u\tadmin: %u\t"...
+__text:00000ED2			LDR		R1, [SP,#0x6C+var_3C]
+__text:00000ED4			LDR		R2, [SP,#0x6C+var_40]
+__text:00000ED6			LDR		R3, [SP,#0x6C+var_44]
+__text:00000ED8			LDR.W		R9, [SP,#0x6C+var_48]
+__text:00000EDC			STR.W		R9, [SP,#0x6C+var_6C]
+__text:00000EE0			BLX		_printf
+__text:00000EE4			LDR		R1, [SP,#0x6C+var_3C]
+__text:00000EE6			CMP		R1, #0
+__text:00000EE8			STR		R0, [SP,#0x6C+var_68]
+__text:00000EEA			BEQ		loc_F08
+__text:00000EEC			LDR		R0, [SP,#0x6C+var_40]
+__text:00000EEE			CMP		R0, #0
+__text:00000EF0			BEQ		loc_F08
+__text:00000EF2			LDR		R0, [SP,#0x6C+var_44]
+__text:00000EF4			CMP		R0, #0
+__text:00000EF6			BEQ		loc_F08
+__text:00000EF8			LDR		R0, [SP,#0x6C+var_48]
+__text:00000EFA			CMP		R0, #0
+__text:00000EFC			BEQ		loc_F08
+__text:00000EFE			MOVS		R0, #1
+__text:00000F04			STR		R0, [SP,#0x6C+var_C]
+__text:00000F06			B		loc_F1C
+__text:00000F08	; ---------------------------------------------------------------------------
+__text:00000F08
+__text:00000F08	loc_F08					; CODE XREF: _check_login+2BAj
+__text:00000F08						; _check_login+2C0j ...
+__text:00000F08			B		loc_F0A
+__text:00000F0A	; ---------------------------------------------------------------------------
+__text:00000F0A
+__text:00000F0A	loc_F0A					; CODE XREF: _check_login:loc_F08j
+__text:00000F0A			LDR		R0, [SP,#0x6C+var_24]
+__text:00000F0C			LDR		R1, [SP,#0x6C+var_28]
+__text:00000F0E			ADD		R0, R1
+__text:00000F10			STR		R0, [SP,#0x6C+var_28]
+__text:00000F12			B		loc_CB0
+__text:00000F14	; ---------------------------------------------------------------------------
+__text:00000F14
+__text:00000F14	loc_F14					; CODE XREF: _check_login+86j
+__text:00000F14			MOVS		R0, #0
+__text:00000F1A			STR		R0, [SP,#0x6C+var_C]
+__text:00000F1C
+__text:00000F1C	loc_F1C					; CODE XREF: _check_login+5Cj
+__text:00000F1C						; _check_login+2D6j
+__text:00000F1C			LDR		R0, [SP,#0x6C+var_C]
+__text:00000F1E			ADD		SP, SP,	#0x64
+__text:00000F20			POP		{R7,PC}
+__text:00000F20	; End of function _check_login
+__text:00000F20
+__text:00000F20	; __text	ends
+__text:00000F20
+__stub_helper:00000F24 ; ===========================================================================
+__stub_helper:00000F24
+__stub_helper:00000F24 ; Segment type: Pure code
+__stub_helper:00000F24		       AREA __stub_helper, CODE, READWRITE
+__stub_helper:00000F24		       ; ORG 0xF24
+__stub_helper:00000F24		       CODE32
+__stub_helper:00000F24
+__stub_helper:00000F24 ; =============== S U B R O U T I N E =======================================
+__stub_helper:00000F24
+__stub_helper:00000F24
+__stub_helper:00000F24 _stub_helpers			       ; CODE XREF: _printf_0+4j
+__stub_helper:00000F24					       ; _strncmp_0+4j
+__stub_helper:00000F24
+__stub_helper:00000F24 var_8	       = -8
+__stub_helper:00000F24 var_4	       = -4
+__stub_helper:00000F24
+__stub_helper:00000F24		       STR	       R12, [SP,#var_4]!
+__stub_helper:00000F28		       LDR	       R12, =(off_100C - 0xF34)
+__stub_helper:00000F2C		       ADD	       R12, PC,	R12 ; off_100C
+__stub_helper:00000F30		       STR	       R12, [SP,#4+var_8]!
+__stub_helper:00000F34		       LDR	       R12, =(dyld_stub_binder_ptr - 0xF40)
+__stub_helper:00000F38		       ADD	       R12, PC,	R12 ; dyld_stub_binder_ptr
+__stub_helper:00000F3C		       LDR	       PC, [R12] ; dyld_stub_binder
+__stub_helper:00000F3C ; End of	function _stub_helpers
+__stub_helper:00000F3C
+__stub_helper:00000F3C ; ---------------------------------------------------------------------------
+__stub_helper:00000F40 off_F40	       DCD off_100C - 0xF34    ; DATA XREF: _stub_helpers+4r
+__stub_helper:00000F44 off_F44	       DCD dyld_stub_binder_ptr	- 0xF40
+__stub_helper:00000F44					       ; DATA XREF: _stub_helpers+10r
+__stub_helper:00000F48
+__stub_helper:00000F48 ; =============== S U B R O U T I N E =======================================
+__stub_helper:00000F48
+__stub_helper:00000F48
+__stub_helper:00000F48 ; int printf_0(const char *, ...)
+__stub_helper:00000F48 _printf_0
+__stub_helper:00000F48		       LDR	       R12, =0
+__stub_helper:00000F4C		       B	       _stub_helpers
+__stub_helper:00000F4C ; End of	function _printf_0
+__stub_helper:00000F4C
+__stub_helper:00000F4C ; ---------------------------------------------------------------------------
+__stub_helper:00000F50 dword_F50       DCD 0		       ; DATA XREF: _printf_0r
+__stub_helper:00000F54
+__stub_helper:00000F54 ; =============== S U B R O U T I N E =======================================
+__stub_helper:00000F54
+__stub_helper:00000F54
+__stub_helper:00000F54 ; int strncmp_0(const char *, const char	*, size_t)
+__stub_helper:00000F54 _strncmp_0
+__stub_helper:00000F54		       LDR	       R12, =0xE
+__stub_helper:00000F58		       B	       _stub_helpers
+__stub_helper:00000F58 ; End of	function _strncmp_0
+__stub_helper:00000F58
+__stub_helper:00000F58 ; ---------------------------------------------------------------------------
+__stub_helper:00000F5C dword_F5C       DCD 0xE		       ; DATA XREF: _strncmp_0r
+__stub_helper:00000F5C ; __stub_helper ends
+__stub_helper:00000F5C
+__cstring:00000F60 ; ===========================================================================
+__cstring:00000F60
+__cstring:00000F60 ; Segment type: Pure	data
+__cstring:00000F60		   AREA	__cstring, DATA, ALIGN=0
+__cstring:00000F60		   ; ORG 0xF60
+__cstring:00000F60 aUsername	   DCB "USERNAME",0        ; DATA XREF: _check_login+AAo
+__cstring:00000F60					   ; _check_login+B2o
+__cstring:00000F69 aCaptainfalcon  DCB "captainfalcon",0   ; DATA XREF: _check_login+EAo
+__cstring:00000F69					   ; _check_login+F2o
+__cstring:00000F77 aPassword	   DCB "PASSWORD",0        ; DATA XREF: _check_login:loc_D3Eo
+__cstring:00000F77					   ; _check_login+116o
+__cstring:00000F80 aFc03329505475d DCB "fc03329505475dd4be51627cc7f0b1f1",0
+__cstring:00000F80					   ; DATA XREF:	_check_login+14Eo
+__cstring:00000F80					   ; _check_login+156o
+__cstring:00000FA1 aAdmin	   DCB "ADMIN",0           ; DATA XREF: _check_login:loc_DA2o
+__cstring:00000FA1					   ; _check_login+17Ao
+__cstring:00000FA7 aU		   DCB "%u",0xA,0          ; DATA XREF: _check_login:loc_DFAo
+__cstring:00000FA7					   ; _check_login+1D2o
+__cstring:00000FAB aIsawesome	   DCB "ISAWESOME",0       ; DATA XREF: _check_login:loc_E0Co
+__cstring:00000FAB					   ; _check_login+1E4o
+__cstring:00000FB5 a_16sUP	   DCB "%.16s %u",9,"%p",0xA,0
+__cstring:00000FB5					   ; DATA XREF:	_check_login+25Co
+__cstring:00000FB5					   ; _check_login+264o
+__cstring:00000FC2 aUsernameUPassw DCB "username: %u",9,"password: %u",9,"admin: %u",9,"isawesome: %u",0xA,0
+__cstring:00000FC2					   ; DATA XREF:	_check_login:loc_EC8o
+__cstring:00000FC2					   ; _check_login+2A0o
+__cstring:00000FC2 ; __cstring	   ends
+__cstring:00000FC2
+__symbolstub1:00000FF8 ; ===========================================================================
+__symbolstub1:00000FF8
+__symbolstub1:00000FF8 ; Segment type: Pure code
+__symbolstub1:00000FF8		       AREA __symbolstub1, CODE, READWRITE
+__symbolstub1:00000FF8		       ; ORG 0xFF8
+__symbolstub1:00000FF8		       CODE32
+__symbolstub1:00000FF8 ; [00000004 BYTES: COLLAPSED FUNCTION _printf. PRESS KEYPAD CTRL-"+" TO EXPAND]
+__symbolstub1:00000FFC ; [00000004 BYTES: COLLAPSED FUNCTION _strncmp. PRESS KEYPAD CTRL-"+" TO EXPAND]
+__lazy_symbol:00001000 ; ===========================================================================
+__lazy_symbol:00001000
+__lazy_symbol:00001000 ; Segment type: Pure data
+__lazy_symbol:00001000		       AREA __lazy_symbol, DATA
+__lazy_symbol:00001000		       ; ORG 0x1000
+__lazy_symbol:00001000 _printf_ptr     DCD __imp__printf       ; DATA XREF: _printfr
+__lazy_symbol:00001004 _strncmp_ptr    DCD __imp__strncmp      ; DATA XREF: _strncmpr
+__lazy_symbol:00001004 ; __lazy_symbol ends
+__lazy_symbol:00001004
+__nl_symbol_ptr:00001008 ; ===========================================================================
+__nl_symbol_ptr:00001008
+__nl_symbol_ptr:00001008 ; Segment type: Pure data
+__nl_symbol_ptr:00001008		 AREA __nl_symbol_ptr, DATA
+__nl_symbol_ptr:00001008		 ; ORG 0x1008
+__nl_symbol_ptr:00001008 dyld_stub_binder_ptr DCD dyld_stub_binder
+__nl_symbol_ptr:00001008					 ; DATA	XREF: _stub_helpers+14o
+__nl_symbol_ptr:00001008					 ; __stub_helper:off_F44o
+__nl_symbol_ptr:0000100C off_100C	 DCD dword_0		 ; DATA	XREF: _stub_helpers+8o
+__nl_symbol_ptr:0000100C					 ; __stub_helper:off_F40o
+__nl_symbol_ptr:0000100C ; __nl_symbol_ptr ends
+__nl_symbol_ptr:0000100C
+__LINKEDIT_hidden:00002000 ; ===========================================================================
+__LINKEDIT_hidden:00002000
+__LINKEDIT_hidden:00002000 ; [00000194 BYTES: COLLAPSED	SEGMENT	__LINKEDIT_hidden. PRESS KEYPAD	CTRL-"+" TO EXPAND]
+UNDEF:000021A0 ;
+UNDEF:000021A0 ; Imports from /usr/lib/libSystem.B.dylib
+UNDEF:000021A0 ;
+UNDEF:000021A0 ; ===========================================================================
+UNDEF:000021A0
+UNDEF:000021A0 ; Segment type: Externs
+UNDEF:000021A0 ; int _printf(const char	*, ...)
+UNDEF:000021A0		       IMPORT __imp__printf    ; CODE XREF: _printfj
+UNDEF:000021A0					       ; DATA XREF: _printfo ...
+UNDEF:000021A4 ; int _strncmp(const char *, const char *, size_t)
+UNDEF:000021A4		       IMPORT __imp__strncmp   ; CODE XREF: _strncmpj
+UNDEF:000021A4					       ; DATA XREF: _strncmpo ...
+UNDEF:000021A8		       IMPORT dyld_stub_binder ; CODE XREF: _stub_helpers+18j
+UNDEF:000021A8					       ; DATA XREF: __nl_symbol_ptr:dyld_stub_binder_ptro
+UNDEF:000021A8
+UNDEF:000021A8		       END
