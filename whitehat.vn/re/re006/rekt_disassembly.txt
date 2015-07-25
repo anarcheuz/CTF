@@ -1,0 +1,180 @@
+  3           0 LOAD_CONST               1 ('Welcome to secREKT machine!')
+              3 PRINT_ITEM          
+              4 PRINT_NEWLINE       
+
+  5           5 LOAD_CONST               2 ('abcdefghijklmnopqrstuvwxyz0123456789.')
+              8 STORE_FAST               0 (st)
+
+              /*st = 'abcdefghijklmnopqrstuvwxyz0123456789.' */
+
+  6          11 LOAD_CONST               3 (3)
+             14 LOAD_CONST               4 (0)
+             17 LOAD_CONST               5 (19)
+             20 LOAD_CONST               4 (0)
+             23 LOAD_CONST               6 (36)
+             26 LOAD_CONST               7 (8)
+             29 LOAD_CONST               8 (13)
+             32 BUILD_LIST               7
+             35 STORE_FAST               1 (inp_array)
+
+             /* inp_array=[3, 0, 19, 0, 36, 8, 13] */
+
+  7          38 LOAD_CONST               3 (3)
+             41 LOAD_CONST               4 (0)
+             44 LOAD_CONST               5 (19)
+             47 LOAD_CONST               4 (0)
+             50 LOAD_CONST               6 (36)
+             53 LOAD_CONST               9 (14)
+             56 LOAD_CONST              10 (20)
+             59 LOAD_CONST               5 (19)
+             62 BUILD_LIST               8
+             65 STORE_FAST               2 (out_array)
+
+             /* out_array = [3, 0, 19, 0, 36, 14, 20, 19] */
+
+  8          68 LOAD_CONST              11 ('')
+             71 STORE_FAST               3 (inp)
+
+             /* inp = '' */
+
+  9          74 LOAD_CONST              11 ('')
+             77 STORE_FAST               4 (out)
+
+             /* out = '' */
+
+ 10          80 SETUP_LOOP              28 (to 111)
+             83 LOAD_FAST                1 (inp_array)
+             86 GET_ITER            
+        >>   87 FOR_ITER                20 (to 110)
+             90 STORE_FAST               5 (inp_index)  //inp_index = inp_array.iter()
+
+ 11          93 LOAD_FAST                3 (inp)  // push inp
+             96 LOAD_FAST                0 (st) // push st
+             99 LOAD_FAST                5 (inp_index) // push inp_index
+            102 BINARY_SUBSCR       // TOS = TOS1[TOS] => pop; push st[inp_index]
+            103 INPLACE_ADD         // TOS = TOS1 + TOS => inp += TOS
+            104 STORE_FAST               3 (inp)
+            107 JUMP_ABSOLUTE           87
+        >>  110 POP_BLOCK      
+
+            /*
+                for inp_index in inp_array:
+                    inp += st[inp_index]
+             */     
+
+ 12     >>  111 SETUP_LOOP              28 (to 142)
+            114 LOAD_FAST                2 (out_array)
+            117 GET_ITER            
+        >>  118 FOR_ITER                20 (to 141)
+            121 STORE_FAST               6 (out_index)
+
+ 13         124 LOAD_FAST                4 (out)
+            127 LOAD_FAST                0 (st)
+            130 LOAD_FAST                6 (out_index)
+            133 BINARY_SUBSCR       
+            134 INPLACE_ADD         
+            135 STORE_FAST               4 (out)
+            138 JUMP_ABSOLUTE          118
+        >>  141 POP_BLOCK           
+
+            /*
+                for out_index in out_array:
+                    out += st[out_index]
+            */
+
+ 15     >>  142 LOAD_GLOBAL              0 (open)
+            145 LOAD_FAST                3 (inp)
+            148 LOAD_CONST              12 ('rb')
+            151 CALL_FUNCTION            2
+            154 LOAD_ATTR                1 (read)
+            157 CALL_FUNCTION            0
+            160 STORE_FAST               7 (data)
+
+            /*
+                data = open(inp, 'rb').read()
+            */
+
+ 16         163 LOAD_GLOBAL              0 (open)
+            166 LOAD_FAST                4 (out)
+            169 LOAD_CONST              13 ('wb')
+            172 CALL_FUNCTION            2
+            175 STORE_FAST               8 (output)
+
+            /*
+                output = open(out, 'wb')
+            */
+
+ 17         178 SETUP_LOOP              63 (to 244)
+            181 LOAD_GLOBAL              2 (range)
+            184 LOAD_GLOBAL              3 (len)
+            187 LOAD_FAST                7 (data)
+            190 CALL_FUNCTION            1
+            193 CALL_FUNCTION            1
+            196 GET_ITER            
+        >>  197 FOR_ITER                43 (to 243)
+            200 STORE_FAST               9 (i)
+
+
+ 18         203 LOAD_FAST                8 (output)
+            206 LOAD_ATTR                4 (write)
+            209 LOAD_GLOBAL              5 (chr)
+            212 LOAD_GLOBAL              6 (ord)
+            215 LOAD_FAST                7 (data)
+            218 LOAD_FAST                9 (i)
+            221 BINARY_SUBSCR       
+            222 CALL_FUNCTION            1
+            225 LOAD_FAST                9 (i)
+            228 BINARY_ADD          
+            229 LOAD_CONST              14 (256)
+            232 BINARY_MODULO       
+            233 CALL_FUNCTION            1
+            236 CALL_FUNCTION            1
+            239 POP_TOP             
+            240 JUMP_ABSOLUTE          197
+        >>  243 POP_BLOCK  
+
+            /*
+                for i in range(len(data)):
+                    output.write(chr((ord(data[i]) + i) % 256))
+            */         
+
+ 19     >>  244 LOAD_FAST                8 (output)
+            247 LOAD_ATTR                7 (close)
+            250 CALL_FUNCTION            0
+            253 POP_TOP       
+
+            /*
+                close(output)
+            */      
+
+ 21         254 LOAD_CONST              15 ('Done!')
+            257 PRINT_ITEM          
+            258 PRINT_NEWLINE       
+            259 LOAD_CONST               0 (None)
+            262 RETURN_VALUE    
+
+/*
+
+
+st = 'abcdefghijklmnopqrstuvwxyz0123456789.'
+inp_array=[3, 0, 19, 0, 36, 8, 13] 
+out_array = [3, 0, 19, 0, 36, 14, 20, 19] 
+inp = '' 
+out = '' 
+
+for inp_index in inp_array:
+    inp += st[inp_index]
+
+for out_index in out_array:
+    out += st[out_index]
+
+data = open(inp, 'rb').read()
+output = open(out, 'wb')
+
+for i in range(len(data)):
+    output.write(chr((ord(data[i]) + i) % 256))
+
+close(output)
+print 'Done!'
+
+*/    
